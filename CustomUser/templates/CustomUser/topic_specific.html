@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        $(document).ready(function(){
+            $("#container").hide()
+            $("#reveal").click(function(){
+                $("#container").show()
+            })
+        });
+    </script>
+    {{object.question}}
+    <br>
+    asked by <br> <a href="{% url 'about' object.user%}">{{object.user}}</a>
+    <button id="reveal">
+        ANSWER
+    </button>
+    <hr>
+    Answers
+    <br>
+    {%for t in temp %}
+    {{t.answer}}
+    <br>
+    asked by <br> {{t.user}}
+    <hr>
+    {%endfor%}
+    <hr>
+    <div id="container">
+        <form method="POST">
+        {%csrf_token%}
+        {{form.answer}}
+        <button type="submit">
+            submit
+        </button>
+        </form>
+    </div>
+</body>
+</html>

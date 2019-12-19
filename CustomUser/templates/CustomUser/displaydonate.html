@@ -1,0 +1,19 @@
+Subject Name = {{displayinfo.subject_name}}</br>
+</br>
+book cover image = <img src="{{displayinfo.cover.url}}" alt="n" width="50" height="50">
+</br>
+</br>
+author name = {{displayinfo.author1}}
+</br>
+</br>
+uploaded_by = <a href="{% url 'about' displayinfo.uploaded_by%}">{{displayinfo.uploaded_by}}</a>
+</br>
+pdf : <a href="{{displayinfo.pdffile.url}}"><button>open</button></a>
+</br>
+{%if user.username != displayinfo.uploaded_by %}
+<h1><a href="{% url 'sendmessage' displayinfo.pk displayinfo.uploaded_by user.username%}">+ SEND MESSAGE</a></br></h1>
+{%endif%}
+<a href="{%url 'home' %}">Home page</a>
+<hr>
+<h1>Similar Books</h1>
+{{Similar}}

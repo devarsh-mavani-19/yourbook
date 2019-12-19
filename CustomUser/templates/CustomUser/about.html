@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+    About
+    {{ username }}
+    </h1>
+    <h2>
+    {% for f in form %}
+
+        {{f.about}}
+    {% endfor %}
+    {% if username == user.username %}
+    <button type="button" onclick="editpage()">Edit</button>
+    {%else%}
+    <a href="{%url 'sendmessage' 0 username user.username %}">++sendmessage</a>
+    {%endif%}
+    <script>
+        function editpage()
+        {
+            window.location.pathname = "userinfo/editabout/";
+        }
+    </script>
+</h2>
+</body>
+</html>

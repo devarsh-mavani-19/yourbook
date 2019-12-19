@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+
+button
+{
+  color: red;
+  background-color: black;
+  border: 1px solid red;
+}
+  #latestupload
+  {
+    border:5px solid brown;
+    object-fit: cover;
+    margin-left: 8px;
+  }
+  .enrollment_nav{ 
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+body {
+  background-color: #ffc5e9;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(247, 33, 132);
+  color: rgb(255, 255, 255);
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+
+<div class="topnav">
+  <a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'contact' %}">Contact</a>
+  <a href="{% url 'about' user.username %}">About</a>
+  <a href="{% url 'logout' %}">Log Out</a>
+  <a href="{% url 'donate' %}">donate</a>
+  <a href="{% url 'topics' %}">Topics</a>
+  <a href="{% url 'askquestion' %}">ask question</a>
+  <div class="enrollment_nav">
+    Enrollment Number : {{user.enrollment}}
+  </div>
+</div>
+
+<div style="padding-left:16px">
+  <h1> Hi {{ user.username }} !
+    {{useruser}}
+  </h1>
+</div>
+
+<form method="POST" id='fakebox'>
+  {%csrf_token%}
+<div class="container">
+  {{search}}
+  <div class="search"></div>
+</div>
+  
+  <button type="submit">search</button>
+</form>
+{%if temp != "not found"%}
+{%for t in temp%}
+<a href="{% url 'displaydonate' t.pk%}">{{t.subject_name}}</a>
+<img src="{{t.cover.url}}" alt="na" height="250" width="250">
+{%endfor%}
+{%else%}
+<center>
+<h1>
+{{temp}}
+</h1>
+</center>
+{%endif%}
+</br>
+</br>
+</br>
+</br>
+
+{%if alldata%}
+<center><h1> Latest Uploads </h1></center>
+
+{%for t in alldata%}
+<a href="{% url 'displaydonate' t.pk%}"><img src="{{t.cover.url}}" height="300" width="280" id="latestupload"></a>
+{%endfor%}
+{%endif%}
+
+
+
+{% else %}
+  <script>
+      window.location.pathname = "user/login/";
+     
+  </script>
+{% endif %}
+
+</body>
+</html>

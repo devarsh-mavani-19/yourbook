@@ -1,0 +1,30 @@
+{% if user.is_authenticated %}
+<h1>About <div id='temp'>{{username}}</div></h1>
+<form method="POST">
+{% csrf_token %}
+
+{{form.username}}
+{{form.about}}
+<button type="submit">save</button>
+</form>
+<script>
+
+  var c = document.getElementById('id_about');
+  c.value = "{{ab}}";
+  document.getElementById('id_username').value = document.getElementById('temp').textContent;
+
+  console.log(document.getElementById('id_username'));
+
+  function submitting()
+  {
+    var a = document.getElementById('yo');
+    a.id_username.value = document.getElementById('temp').textContent;
+    return true;
+  }
+</script>
+{% else %}
+  <script>
+    window.location.pathname = "user/login/";
+
+  </script>
+{% endif %}

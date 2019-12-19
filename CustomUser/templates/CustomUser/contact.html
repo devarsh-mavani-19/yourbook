@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    #rec
+    {
+      float: left;
+      width: 50%;
+      background-color: rgb(198, 198, 224);
+      color: rgb(7, 41, 105);
+      height: 100%;
+      overflow: scroll;
+    }
+    #rec a
+    {
+      color:crimson;
+      
+    }
+    #send
+    {
+      float: left;
+      width: 50%;
+      background-color: rgb(198, 198, 224);
+      color: rgb(7, 41, 105);
+      height: 100%;
+      overflow: scroll;
+    }
+    #send a
+    {
+      color:crimson;
+      
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <h1>
+        <div id="rec">
+
+            RECIEVED MESSAGES</br>
+          <ul>
+            
+            {%for msg in data%}
+            {% if msg.to == user.username %}
+            <li>
+            message : {{msg.mainmessage}}</br>
+            on : {{msg.created_on}}</br>
+            from : <a href="{% url 'about' msg.fromperson %}">{{msg.fromperson}}</a></br>
+            {%if msg.frompost != 0%}
+            <a href="{% url 'displaydonate'  msg.frompost  %}">from here</a>
+            {%else%}
+            <a href="{%url 'about' user.username%}">
+              from here
+            </a>
+            {%endif%}
+          </li>
+            {%endif%}
+            {%endfor%}
+          
+          </ul>
+        </div>
+        <div id="send">
+          SENT MESSAGES</br>
+            {%for msg in data%}
+            {% if msg.to != user.username %}
+            message = {{msg.mainmessage}}</br>
+            on : {{msg.created_on}}</br>
+            <a href="{% url 'about' msg.to %}">to : {{msg.to}}</a></br>
+            {%endif%}
+            {%endfor%}
+        </div></br>
+      </br>
+    </br>
+  </br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+        <a href="{%url 'home' %}">Home page</a>
+    </h1>
+    {% else %}
+      <script>
+          window.location.pathname = "user/login/";
+         
+      </script>
+    {% endif %}
+    
+</body>
+</html>

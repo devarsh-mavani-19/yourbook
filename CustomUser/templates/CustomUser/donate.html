@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #temp
+        {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+    Subject = {{form.subject_name}}
+    coursr = {{form.course}}
+    a1 = {{form.author1}}
+    a2 = {{form.author2}}
+    p = {{form.publisher}}
+    t1 = {{form.tags1}}
+    t2 = {{form.tags2}}
+    t3 = {{form.tags3}}
+    cover = {{form.cover}}
+    uploaded_by = {{form.uploaded_by}}
+    pdf = {{form.pdffile}}
+    <button type="submit">submit</button>
+</form>
+    
+</body>
+</html>
